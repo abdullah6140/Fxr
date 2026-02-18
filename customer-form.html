@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل بيانات الضمان - عميل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .required {
+            color: #f44336;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:hover {
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .status-message {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .status-message.error {
+            background: #f44336;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-right: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #1976D2;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📱</div>
+            <h1>تسجيل بيانات الضمان</h1>
+            <p class="subtitle">مؤسسة فيكسر للاتصالات</p>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <div class="info-box">
+            💡 <strong>تنبيه:</strong> يُرجى التأكد من صحة البيانات قبل الإرسال
+        </div>
+
+        <form id="customerForm">
+            <div class="form-group">
+                <label for="customerName">الاسم <span class="required">*</span></label>
+                <input type="text" id="customerName" required placeholder="اسمك الكامل">
+            </div>
+
+            <div class="form-group">
+                <label for="customerPhone">رقم الجوال <span class="required">*</span></label>
+                <input type="tel" id="customerPhone" required placeholder="05xxxxxxxx" pattern="[0-9]{10}">
+            </div>
+
+            <div class="form-group">
+                <label for="phoneModel">موديل الجوال <span class="required">*</span></label>
+                <input type="text" id="phoneModel" required placeholder="مثال: iPhone 15 Pro">
+            </div>
+
+            <div class="form-group">
+                <label for="serialNumber">رقم السيريال <span class="required">*</span></label>
+                <input type="text" id="serialNumber" required placeholder="الرقم التسلسلي للجهاز">
+            </div>
+
+            <div class="form-group">
+                <label for="protectionType">نوع الحماية <span class="required">*</span></label>
+                <select id="protectionType" required>
+                    <option value="">اختر نوع الحماية</option>
+                    <option value="بكج فيكسر - البلاتيني">بكج فيكسر - البلاتيني</option>
+                    <option value="واقي شاشة زجاجي">واقي شاشة زجاجي</option>
+                    <option value="واقي شاشة بلاستيكي">واقي شاشة بلاستيكي</option>
+                    <option value="جراب حماية">جراب حماية</option>
+                    <option value="واقي كاميرا">واقي كاميرا</option>
+                    <option value="حماية شاملة">حماية شاملة</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="invoiceNumber">رقم الفاتورة <span class="required">*</span></label>
+                <input type="text" id="invoiceNumber" required placeholder="رقم فاتورة الشراء">
+            </div>
+
+            <button type="submit" class="btn">📱 إرسال عبر واتساب</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('customerForm');
+        const statusMessage = document.getElementById('statusMessage');
+
+        function showMessage(msg, type = 'success') {
+            statusMessage.textContent = msg;
+            statusMessage.className = 'status-message ' + (type === 'error' ? 'error' : '');
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                name: document.getElementById('customerName').value.trim(),
+                phone: document.getElementById('customerPhone').value.trim(),
+                model: document.getElementById('phoneModel').value.trim(),
+                serial: document.getElementById('serialNumber').value.trim(),
+                protection: document.getElementById('protectionType').value,
+                invoice: document.getElementById('invoiceNumber').value.trim()
+            };
+
+            if (!data.phone.match(/^05\d{8}$/)) {
+                showMessage('رقم الجوال غير صحيح! يجب أن يبدأ بـ 05 ويتكون من 10 أرقام', 'error');
+                return;
+            }
+
+            let message = `*📱 تسجيل ضمان جديد - عميل*\n\n`;
+            message += `━━━━━━━━━━━━━━━\n\n`;
+            message += `👤 *الاسم:* ${data.name}\n`;
+            message += `📞 *الجوال:* ${data.phone}\n`;
+            message += `📱 *الموديل:* ${data.model}\n`;
+            message += `🔢 *السيريال:* ${data.serial}\n`;
+            message += `🛡️ *نوع الحماية:* ${data.protection}\n`;
+            message += `📋 *رقم الفاتورة:* ${data.invoice}\n\n`;
+            message += `━━━━━━━━━━━━━━━\n\n`;
+            message += `📅 *التاريخ:* ${new Date().toLocaleString('ar-SA')}\n\n`;
+            message += `━━━━━━━━━━━━━━━\n\n`;
+            message += `*📸 خطوة مهمة:*\n\n`;
+            message += `يُرجى إرسال الصور التالية الآن:\n\n`;
+            message += `1️⃣ صورة فاتورة الشراء\n`;
+            message += `2️⃣ صورة الجوال من الأمام (الرقم التسلسلي)\n`;
+            message += `3️⃣ صورة الجوال من الخلف\n\n`;
+            message += `⏰ *مهم:* يجب الإرسال خلال 24 ساعة من التركيب\n\n`;
+            message += `شكراً لثقتكم بنا 🙏`;
+
+            let whatsappNumber = '966590009774';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+            showMessage('✅ جاري فتح واتساب...');
+            
+            setTimeout(() => {
+                form.reset();
+                showMessage('تم الإرسال! يمكنك تسجيل عميل آخر', 'success');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
